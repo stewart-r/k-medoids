@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Implementation of the k-mediods clustering algorithm",
   "main": "index.js",
-  "types":"index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "test": "test"
   },
@@ -24,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/stewart-r/k-medoids/issues"
   },
-  "homepage": "https://github.com/stewart-r/k-medoids#readme"
+  "homepage": "https://github.com/stewart-r/k-medoids#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0",
+    "typescript": "^2.6.2"
+  }
 }
