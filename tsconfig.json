@@ -1,8 +1,15 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es5",
-        "noImplicitAny": false,
-        "sourceMap": false
-    }
+        "target": "ES2015",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "allowUnreachableCode": false,
+        "alwaysStrict": true,
+        "noImplicitReturns": true,
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./test/**/*.ts",
+    ]
 }
