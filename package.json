@@ -20,7 +20,7 @@
     "mediod"
   ],
   "author": "Stewart Robertson <stewart_robertson@sky.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/stewart-r/k-medoids/issues"
   },
