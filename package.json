@@ -5,9 +5,13 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "clean": "rimraf ./dist",
+    "prebuild:publish": "npm run clean",
     "build:publish": "tsc -p ./tsconfig.publish.json",
+    "postbuild:publish": "tslint -p ./tsconfig.publish.json",
     "build:test": "tsc",
     "pretest": "npm run build:test",
+    "posttest": "tslint -p .",
     "test": "mocha"
   },
   "repository": {
@@ -33,6 +37,7 @@
     "@types/mocha": "^2.2.46",
     "chai": "^4.1.2",
     "mocha": "^4.1.0",
+    "rimraf": "^2.6.2",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
   }
