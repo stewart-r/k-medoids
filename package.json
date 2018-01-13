@@ -1,0 +1,28 @@
+{
+  "name": "k-mediods",
+  "version": "0.0.1",
+  "description": "Implementation of the k-mediods clustering algorithm",
+  "main": "index.js",
+  "types":"index.d.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stewart-r/k-medoids.git"
+  },
+  "keywords": [
+    "k-medoids",
+    "clustering",
+    "cluster",
+    "partition",
+    "partitioning",
+    "mediod"
+  ],
+  "author": "Stewart Robertson <stewart_robertson@sky.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stewart-r/k-medoids/issues"
+  },
+  "homepage": "https://github.com/stewart-r/k-medoids#readme"
+}
