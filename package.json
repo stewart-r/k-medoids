@@ -2,10 +2,13 @@
   "name": "k-mediods",
   "version": "0.0.1",
   "description": "Implementation of the k-mediods clustering algorithm",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "test"
+    "build:live":"tsc",
+    "build:test":"tsc -p ./tsconfig.test.json",
+    "pretest":"npm run build:test",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
