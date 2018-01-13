@@ -3,13 +3,13 @@
         "module": "commonjs",
         "target": "ES2015",
         "noImplicitAny": true,
-        "sourceMap": false,
+        "sourceMap": true,
         "allowUnreachableCode": false,
         "alwaysStrict": true,
-        "noImplicitReturns": true,
-        "outDir": "./dist"
+        "noImplicitReturns": true
     },
     "include": [
-        "./src/**/*.ts"        
+        "./src/**/*.ts",
+        "./test/**/*.ts"
     ]
 }
