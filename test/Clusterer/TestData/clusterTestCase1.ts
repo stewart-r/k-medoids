@@ -1,4 +1,4 @@
-import { ICluster } from "k-medoids/src/Clusterer/cluster";
+import { ICluster } from "../../../src/Clusterer/cluster";
 
 export const testCase: Array<ICluster<number[]>> = [
     {

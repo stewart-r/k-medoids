@@ -5,7 +5,7 @@ import { assert, expect } from "chai";
 import * as combinatronics from "js-combinatorics";
 import "mocha";
 
-import { Cluster } from "k-medoids/src/Clusterer/cluster";
+import { Cluster } from "../../src/Clusterer/cluster";
 import { Clusterer } from "../../src/Clusterer/clusterer";
 import * as errorMessages from "../../src/Clusterer/errorMessages";
 import { distance as euclideanDistance } from "../../src/DistanceCalculators/euclidean";

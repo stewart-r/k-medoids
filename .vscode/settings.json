@@ -9,7 +9,7 @@
             "src/**/*.js.map": true,
             "src/**/*.js": true,
             "test/**/*.js.map": true,
-            "test**/*.js": true
+            "test/**/*.js": true
         }
     }
 }
