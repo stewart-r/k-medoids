@@ -1,7 +1,7 @@
-import { distance as euclideanDistance, distance } from "../DistanceCalculators/euclidean";
+import { distance as euclideanDistance } from "../DistanceCalculators/euclidean";
 import * as errorMessages from "./errorMessages";
 
-import { ICluster } from "./cluster";
+import { Cluster } from "./cluster";
 
 export class Clusterer<T> {
     public static clusterElements = <T extends {}>(elements: T[], k: number, distanceFn?: (t1: T, t2: T) => number) => {
@@ -16,7 +16,12 @@ export class Clusterer<T> {
     }
 
     public Medoids: T[];
-    public Clusters: Array<ICluster<T>>;
+    public Clusters: Array<Cluster<T>>;
+    public IterationCount: number;
+    public get OptimisationStarted() {
+        return this.IterationCount > 0;
+    }
+    public OptimisationCompleted = false;
 
     private constructor(
             public Elements: T[],
@@ -24,36 +29,70 @@ export class Clusterer<T> {
             public DistanceFn?: (t1: T, t2: T) => number) {
         this.DistanceFn = this.DistanceFn || euclideanDistance;
         this.Medoids = this.selectInitialMedoids();
-        this.Clusters = this.allocateToClusters();
+        this.IterationCount = 0;
 
     }
 
-    public run = () => {
-        const ret: T[][] = new Array();
-        return ret;
+    public iterate = () => {
+        if (!this.Clusters) {
+            this.allocateToClustersAroundCurrentMedoids();
+        }
+        const medoidsB4Iter = this.Medoids;
+        const clustersB4Iter = this.Clusters;
+        const costBeforeIteration = this.calculateCurrentCost();
+
+        this.Medoids = [];
+
+        this.Clusters.forEach((c) => {
+            const bestAvailableMedoid = c.Elements[ c.findBestMedoidIdx(this.DistanceFn)];
+            this.Medoids.push(bestAvailableMedoid.Element);
+        });
+        this.allocateToClustersAroundCurrentMedoids();
+
+        const newCost = this.calculateCurrentCost();
+
+        if (newCost < costBeforeIteration) {
+            this.IterationCount++;
+            return true;
+        } else {
+            this.Clusters = clustersB4Iter;
+            this.Medoids = medoidsB4Iter;
+            this.OptimisationCompleted = true;
+            return false;
+        }
     }
 
-    private allocateToClusters = () => {
-        const ret: Array<ICluster<T>> = new Array();
+    public runToCompletion = () => {
+        // tslint:disable-next-line:curly
+        while (this.iterate());
+    }
+
+    public allocateToClustersAroundCurrentMedoids = () => {
+        this.Clusters = new Array();
         this.Medoids.forEach((m) => {
-            ret.push({
+            this.Clusters.push(new Cluster({
                 Elements: [],
                 Medoid: m,
-            });
+            }));
         });
 
         this.Elements.forEach((element, idx) => {
-            const distances = this.findDistances(element);
+            const distances = this.findDistances(this.Clusters.map((c) => c.Medoid), element);
             const idxOfMinDistance = distances
-                .reduce((iMin, x, i, arr) =>  x < arr[iMin] ? i : iMin, Infinity);
-            this.Clusters[idxOfMinDistance].Elements.push(element);
+                .reduce((iMin, x, i, arr) =>  x < arr[iMin] ? i : iMin, 0);
+            this.Clusters[idxOfMinDistance].Elements.push({
+                DistanceFromMedoid: distances[idxOfMinDistance],
+                Element: element,
+            });
         });
-
-        return ret;
     }
 
-    private findDistances = (e: T) => {
-        return this.Clusters.map((m) => this.DistanceFn(m.Medoid, e));
+    public calculateCurrentCost = () => {
+        return this.Clusters.map((c) => c.getCost()).reduce((a, b) => a + b, 0);
+    }
+
+    private findDistances = (bases: T[], e: T) => {
+        return bases.map((m) => this.DistanceFn(m, e));
     }
 
     private selectInitialMedoids = () => {
