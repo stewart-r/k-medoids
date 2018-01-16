@@ -34,6 +34,7 @@ export class Clusterer<T> {
     }
 
     public iterate = () => {
+        this.IterationCount++;
         if (!this.Clusters) {
             this.allocateToClustersAroundCurrentMedoids();
         }
@@ -41,18 +42,30 @@ export class Clusterer<T> {
         const clustersB4Iter = this.Clusters;
         const costBeforeIteration = this.calculateCurrentCost();
 
-        this.Medoids = [];
+        let bestCostSoFar  = costBeforeIteration;
 
-        this.Clusters.forEach((c) => {
-            const bestAvailableMedoid = c.Elements[ c.findBestMedoidIdx(this.DistanceFn)];
-            this.Medoids.push(bestAvailableMedoid.Element);
-        });
-        this.allocateToClustersAroundCurrentMedoids();
+        for (let i = 0; i < this.Medoids.length; i++) {
+            const isNonMedoid = (e: T) =>
+                this.Medoids.filter((m: T) => this.DistanceFn(e, m) === 0 ).length === 0;
+
+            for (const nonMedoidElement of this.Elements.filter(isNonMedoid)) {
+                const proposedMedoids = this.Medoids.slice();
+                proposedMedoids[i] = nonMedoidElement;
+                const tmpClusterer = new Clusterer(this.Elements.slice(), this.K, this.DistanceFn);
+                tmpClusterer.Medoids = proposedMedoids;
+                tmpClusterer.allocateToClustersAroundCurrentMedoids();
+                const costForThisConfiguration = tmpClusterer.calculateCurrentCost();
+                if (costForThisConfiguration < bestCostSoFar) {
+                    bestCostSoFar = costForThisConfiguration;
+                    this.Clusters = tmpClusterer.Clusters;
+                    this.Medoids = proposedMedoids;
+                }
+            }
+        }
 
         const newCost = this.calculateCurrentCost();
 
         if (newCost < costBeforeIteration) {
-            this.IterationCount++;
             return true;
         } else {
             this.Clusters = clustersB4Iter;
@@ -100,8 +113,21 @@ export class Clusterer<T> {
             throw errorMessages.kGtElementArrLength;
         }
         const ret: T[] = [];
-        for (let i = 0; i < this.K; i++) {
-            ret.push(this.Elements[i]);
+        const isDistinctFromGroup = (element: T, group: T[]) => {
+
+            for (const grpElem of group) {
+                if (this.DistanceFn(grpElem, element) === 0) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        let i = 0;
+        while (i < this.Elements.length && ret.length < this.K) {
+            if (isDistinctFromGroup(this.Elements[i], ret)) {
+                ret.push(this.Elements[i]);
+            }
+            i++;
         }
         return ret;
     }
