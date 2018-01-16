@@ -12,6 +12,7 @@
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "preLaunchTask": "pretest",
             "args": [
+                "--require", "source-map-support/register",
                 "--timeout", "999999",
                 "--colors"
             ],

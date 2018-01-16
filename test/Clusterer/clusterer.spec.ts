@@ -37,8 +37,8 @@ describe("Clusterer", () => {
 
                 expect(totalNodes).to.equal(testCase.length);
             });
-            const clustersBeforeIteration = sut.Clusters;
             sut.allocateToClustersAroundCurrentMedoids();
+            const clustersBeforeIteration = sut.Clusters;
             const iterated = sut.iterate();
             describe("after one iteration", () => {
                 it("the clusters change", () => {
