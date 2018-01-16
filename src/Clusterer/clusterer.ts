@@ -75,6 +75,13 @@ export class Clusterer<T> {
         }
     }
 
+    public getClusteredData = () => {
+        if (!this.OptimisationCompleted) {
+            this.runToCompletion();
+        }
+        return this.Clusters.map((c) => c.Elements.map((e) => e.Element));
+    }
+
     public runToCompletion = () => {
         // tslint:disable-next-line:curly
         while (this.iterate());
