@@ -7,7 +7,8 @@
         "allowUnreachableCode": false,
         "alwaysStrict": true,
         "noImplicitReturns": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "declaration": true
     },
     "include": [
         "./src/**/*.ts"        

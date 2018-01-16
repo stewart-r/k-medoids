@@ -1,5 +1,5 @@
 {
-  "name": "k-mediods",
+  "name": "k-medoids",
   "version": "0.0.1",
   "description": "Implementation of the k-mediods clustering algorithm",
   "main": "./dist/index.js",
@@ -11,8 +11,10 @@
     "postbuild:publish": "tslint -p ./tsconfig.publish.json",
     "build:test": "tsc",
     "pretest": "npm run build:test",
-    "posttest": "tslint -p .",
-    "test": "mocha"
+    "postruntests": "tslint -p .",
+    "runtests": "mocha --require source-map-support/register",
+    "test": "npm run runtests",
+    "watch-tests": "tsc-watch --onSuccess \"npm run runtests\""
   },
   "repository": {
     "type": "git",
@@ -34,11 +36,16 @@
   "homepage": "https://github.com/stewart-r/k-medoids#readme",
   "devDependencies": {
     "@types/chai": "^4.1.0",
+    "@types/js-combinatorics": "^0.5.29",
     "@types/mocha": "^2.2.46",
     "chai": "^4.1.2",
+    "js-combinatorics": "^0.5.3",
     "mocha": "^4.1.0",
     "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.0",
+    "tsc-watch": "^1.0.13",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
-  }
+  },
+  "dependencies": {}
 }

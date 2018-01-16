@@ -1,6 +1,2 @@
-import { assert, expect } from "chai";
-import "mocha"
-
-describe("Clusterer", () => {
-    it("can be instantiated");
-});
+import "./Clusterer/cluster.spec";
+import "./Clusterer/clusterer.spec";
