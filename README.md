@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stewart-r/k-medoids.svg?branch=master)](https://travis-ci.org/stewart-r/k-medoids)
+
 # k-medoids
 An implementation of the k-medoids algorithm
 
