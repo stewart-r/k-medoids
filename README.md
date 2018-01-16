@@ -94,7 +94,7 @@ outputs:
 We can cluster any object type as long as we provide a distance function to give the distance between them.
 
 For example with a set of "widgets" like this:
-```
+``` typescript
 const myWidgets = [
     {
         Name: "DoHickey",
