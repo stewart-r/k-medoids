@@ -1,5 +1,5 @@
 {
-  "name": "k-mediods",
+  "name": "k-medoids",
   "version": "0.0.1",
   "description": "Implementation of the k-mediods clustering algorithm",
   "main": "./dist/index.js",
