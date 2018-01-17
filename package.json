@@ -9,7 +9,7 @@
     "prebuild:publish": "npm run clean",
     "build:publish": "tsc -p ./tsconfig.publish.json",
     "postbuild:publish": "tslint -p ./tsconfig.publish.json",
-    "prepbulish" : "npm run build:publish",
+    "prepublish" : "npm run build:publish",
     "build:test": "tsc",
     "pretest": "npm run build:test",
     "postruntests": "tslint -p .",
