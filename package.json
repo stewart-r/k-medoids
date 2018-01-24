@@ -23,11 +23,12 @@
   },
   "keywords": [
     "k-medoids",
+    "kmedoids",    
     "clustering",
     "cluster",
     "partition",
     "partitioning",
-    "mediod"
+    "medoid"
   ],
   "author": "Stewart Robertson <stewart_robertson@sky.com>",
   "license": "MIT",
