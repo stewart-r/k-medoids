@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/stewart-r/k-medoids.svg?branch=master)](https://travis-ci.org/stewart-r/k-medoids)
 
 # k-medoids
-An implementation of the k-medoids algorithm
+An implementation of the k-medoid Partitioning Around Medoids (PAM) algorithm ([wikipedia entry](https://en.wikipedia.org/wiki/K-medoids))
 
 ## Example Usage
 
