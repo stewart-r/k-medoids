@@ -1,6 +1,6 @@
 {
   "name": "k-medoids",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Implementation of the k-mediods clustering algorithm",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -45,7 +45,7 @@
     "mocha": "^10.2.0",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.0",
-    "tsc-watch": "^1.0.13",
+    "tsc-watch": "^7.1.1",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
   }
